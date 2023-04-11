@@ -1,0 +1,51 @@
+<div class="content-home">
+    <div class="content-form">
+        <form action="/product/{{#if product}}update{{else}}create{{/if}}" method="post">
+            {{#if product}}<input type="hidden" name="id" value="{{product._id}}">{{/if}}
+            <label for="name">Nome:</label>
+            <input type="text" name="name" placeholder="Nome do produto" {{#if product}}value="{{product.name}}"{{/if}}>
+            <label for="price">Price:</label>
+            <input type="text" name="price" placeholder="Preço do produto" {{#if product}}value="{{product.price}}"{{/if}}>
+            <div class="form-btn">
+                <input type="submit" value="{{#if product}}Atualizar{{else}}Adicionar novo{{/if}}">
+                {{#if product}}<a href="/product/">Cancelar</a>{{/if}}
+            </div>
+            
+        </form>
+    </div>
+    <div class="content-list">
+        {{#if products}}
+            <table>
+                <tr>
+                    <th>
+                        Nome do produto
+                    </th>
+                    <th>
+                        Preço
+                    </th>
+                    <th>
+                        Ações
+                    </th>
+                </tr>
+                {{#each products}}
+                    <tr>
+                        <td>
+                            {{this.name}}
+                        </td>
+                        <td>
+                            R${{this.price}}
+                        </td>
+                        <td>
+                            <a class="btn-edit" href="/product/edit/{{this._id}}">Editar</a>
+                            <a class="btn-delete" href="/product/delete/{{this._id}}">deletar</a>
+                        </td>
+                    </tr>
+                {{/each}}
+            </table>
+        {{else}}
+            <div class="null-product">
+                <p>Não há nenhum produto registrado!</p>
+            </div>
+        {{/if}}
+    </div>
+</div>
